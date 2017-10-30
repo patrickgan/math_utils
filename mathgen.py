@@ -41,8 +41,8 @@ def foil(a,b,c,d):
     return (a*c, a*d + b*c, b*d) # I like this. So much more modular than the old foil().
 
 def quadratic(a,b,c):
-    discrimnant = b**2 - 4*a*c # discrimnant
-    return ((-b + sqrt(discrimnant))/(2*a),(-b - sqrt(discrimnant))/(2*a))
+    discriminant = b**2 - 4*a*c # discriminant
+    return ((-b + sqrt(discriminant))/(2*a),(-b - sqrt(discriminant))/(2*a))
 
 # Classes to Handle FOIL and Quadratics For Worksheet Printing
 
@@ -73,7 +73,7 @@ class Foil:
             else:
                 return '+ ' + str(n)
         return '(' + x(self.a) + y(self.b) + ') * (' + x(self.c) + y(self.d) + ')'
-    def solve(self): # wow, sounds cool. solving itself.
+    def solve(self):
         def foil(a,b,c,d):
             return Quadratic(a*c, a*d + b*c, b*d)
         return foil(self.a, self.b, self.c, self.d)
@@ -109,10 +109,10 @@ class Quadratic:
             else:
                 return '+ ' + str(n)
         return x2(self.a) + x(self.b) + y(self.c)
-    def solve(self): # wow, solving itself again. use quadratic formula.
+    def solve(self):
         def quadratic(a,b,c):
-            discrimnant = b**2 - 4*a*c # discrimnant
-            return ((-b + sqrt(discrimnant))/(2*a),(-b - sqrt(discrimnant))/(2*a))
+            discriminant = b**2 - 4*a*c # discriminant
+            return ((-b + sqrt(discriminant))/(2*a),(-b - sqrt(discriminant))/(2*a))
         return quadratic(self.a, self.b, self.c)
     # to do: vertex form?
     def vertex(self):
@@ -123,11 +123,8 @@ class Quadratic:
 class Conic:
     pass #todo?
 
-# Because I'm Lazy (might bite me in the butt if I use too recklessly)
-
 def solve(math_class_object):
     """ If an object has a solve method, use it. Otherwise return object. """
-    # lol mini try/catch practice
     try:
         return math_class_object.solve()
     except AttributeError as e:
